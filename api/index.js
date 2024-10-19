@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGO).then(() => {
 });
 
 const app = express();
-
+//allows json as input to the server 
 app.use(express.json());
 
 app.listen(3000, () => {
@@ -24,3 +24,14 @@ app.listen(3000, () => {
 
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
+
+//middleware created
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
+    return res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message
+    })
+})
