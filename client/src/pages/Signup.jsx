@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+//loader gif
+import loader from "../assets/loader.gif";
 
 const Signup = () => {
   const [formData, setFormdata] = useState({});
@@ -74,12 +76,16 @@ const Signup = () => {
           disabled={loading}
           className="bg-slate-600 p-3 text-white rounded-lg uppercase hover:bg-slate-700 disabled:opacity-70 duration-300 delay-100"
         >
-          {loading ? "Loading..." : "Sign Up"}
+          {loading ? (
+            <img src={loader} alt="Loading..." className="h-6 mx-auto" />
+          ) : (
+            "Sign Up"
+          )}
         </button>
       </form>
       <div className="flex gap-2 mt-5">
         <p>Have an account?</p>
-        <Link to={"/Sign-in"}>
+        <Link to={"/sign-in"}>
           <span className="text-blue-400">Sign in</span>
         </Link>
       </div>
